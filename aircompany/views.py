@@ -4,6 +4,7 @@ pymysql.install_as_MySQLdb()
 from django.shortcuts import render, redirect
 from airport.models import Airport
 from aircompany.models import Aircompany
+from django.contrib import messages
 from airport.models import Flight
 from aircompany.models import Plane
 
@@ -44,6 +45,7 @@ def ticketmanage(request):
         Flight.objects.filter(flightid=flight_id).update(destination=flight_destination)
 
         company_flights = Flight.objects.filter(flightid__contains=aircompany.accode)
+        messages.success(request,'修改成功')
         return render(request, "companyflight.html", locals())
 
 
@@ -61,6 +63,7 @@ def addflight(request):
         flight_seatleft = request.POST.get("flight_seatleft", '')
         Flight.objects.create(flightid=flight_id,planeid=flight_planeid,flightname=flight_name,utime=flight_utime,dtime=flight_dtime,origin=flight_origin,destination=flight_destination,isdelay=0,seatleft=flight_seatleft)
 
+        messages.success(request, '添加航班成功')
         company_flights = Flight.objects.filter(flightid__contains=aircompany.accode)
         return render(request, "companyflight.html", locals())
 
@@ -86,6 +89,7 @@ def planesEdit(request):
         Plane.objects.filter(planeid=plane_planeid).update(npeople=plane_npeople)
 
         company_planes = Plane.objects.filter(companyid=aircompany.accode)
+        messages.success(request,'修改成功')
         return render(request, "aircompany/planes.html", locals())
 
 def addPlane(request):
@@ -99,4 +103,5 @@ def addPlane(request):
 
         Plane.objects.create(planeid = plane_planeid,companyid = aircompany.accode,planemodel=plane_planemodel,name=plane_name,npeople=plane_npeople)
         company_planes = Plane.objects.filter(companyid=aircompany.accode)
+        messages.success(request,'添加飞机成功')
         return render(request, "aircompany/planes.html", locals())

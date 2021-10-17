@@ -4,7 +4,7 @@ pymysql.install_as_MySQLdb()
 from django.shortcuts import render, redirect
 from airport.models import Airport
 from airport.models import Flight
-
+from django.contrib import messages
 from django.shortcuts import HttpResponseRedirect,Http404,HttpResponse
 
 class airport:
@@ -28,6 +28,7 @@ def sendDelayMessage(request):
     flight_id = request.GET.get("flightid")
     Flight.objects.filter(flightid=flight_id).update(isdelay=1)
     airport_flights = Flight.objects.filter(origin=airport.airportcode) | Flight.objects.filter(destination=airport.airportcode)
+    messages.success(request,'航班延误提醒发送成功 所有订单均会受到提醒')
     return render(request, "airportflight.html", locals())
 
 #选定给定的航班 机场发送取消延误通知
@@ -35,6 +36,7 @@ def cancelDelayMessage(request):
     flight_id = request.GET.get("flightid")
     Flight.objects.filter(flightid=flight_id).update(isdelay=0)
     airport_flights = Flight.objects.filter(origin=airport.airportcode) | Flight.objects.filter(destination=airport.airportcode)
+    messages.success(request,'航班延误取消成功 所有订单均会受到提醒')
     return render(request, "airportflight.html", locals())
 
 #机场发送对应的取消航班通知
@@ -42,6 +44,7 @@ def cancelFlight(request):
     flight_id = request.GET.get("flightid")
     Flight.objects.filter(flightid=flight_id).delete()
     airport_flights = Flight.objects.filter(origin=airport.airportcode) | Flight.objects.filter(destination=airport.airportcode)
+    messages.success(request,'航班已取消')
     return render(request, "airportflight.html", locals())
 
 #机场进行航班票务信息管理
@@ -63,4 +66,5 @@ def ticketmanage(request):
         Flight.objects.filter(flightid=flight_id).update(flightname=flight_name)
         Flight.objects.filter(flightid=flight_id).update(seatleft=flight_seatleft)
         airport_flights = Flight.objects.filter(origin=airport.airportcode) | Flight.objects.filter(destination=airport.airportcode)
+        messages.success(request,'航班票务信息修改成功')
         return render(request, "airportflight.html", locals())

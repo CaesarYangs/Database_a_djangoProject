@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>航司端-机型管理</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/bookflight.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/table2.css">
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -45,4 +45,11 @@
 
 </table>
 </body>
+        {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+        {% endif %}
 </html>

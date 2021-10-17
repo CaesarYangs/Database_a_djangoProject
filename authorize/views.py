@@ -54,7 +54,8 @@ def login_site(request):
         # return render(request, 'login.html', {
         #     'login_err': 'Please recheck your username or password !'
         # })
-        return HttpResponse("username or password is incorrect {},{}".format(UserInfo.username,UserInfo.password))
+        messages.error(request, '用户名或密码不正确')
+        return render(request,'login.html')
     # return render(request, 'index.html')
 
 def logout_site(request):
@@ -73,4 +74,5 @@ def register(request):
         email = request.POST.get("email", '')
         user = User.objects.create_user(username, email, password)
         user.save()
+        messages.success(request,'注册成功！请登录')
         return render(request,'login.html')

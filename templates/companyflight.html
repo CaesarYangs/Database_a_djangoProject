@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>航班展示</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/bookflight.css">
+    <title>航司端-航班展示</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/table2.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="navbar navbar-default">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">航司航班信息展示</a>
+    </div>
+    </div>
 <table border="1px" width="100%" style="border-collapse: collapse;">
     <a href="/aircompany/addflight/">增加航线</a>
     <a href="/aircompany/planemanage/">飞机资料管理</a>
@@ -49,6 +55,12 @@
 {#    <input type="number" value="购买张数">#}
 {#    <input type="submit" value="提交">#}
 {#</div>#}
-
+        {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+        {% endif %}
 </body>
 </html>

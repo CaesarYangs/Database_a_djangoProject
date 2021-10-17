@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>我的机票</title>
-
+    <link rel="stylesheet" type="text/css" href="/static/css/table2.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="navbar navbar-default">
+    <div class="navbar-header">
+        <a href="/flight" class="navbar-brand">返回购买机票</a>
+    </div>
+    </div>
 <table border="1px" width="100%" style="border-collapse: collapse;">
 
     <tr>
@@ -41,6 +47,12 @@
 {#    <input type="number" value="购买张数">#}
 {#    <input type="submit" value="提交">#}
 {#</div>#}
-
+        {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+        {% endif %}
 </body>
 </html>

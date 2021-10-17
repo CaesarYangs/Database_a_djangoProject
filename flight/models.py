@@ -20,7 +20,7 @@ class Ticket(models.Model):
     ticketid = models.AutoField(db_column='TicketID', primary_key=True)  # Field name made lowercase.
     userid = models.CharField(db_column='UserID', max_length=255, blank=True, null=True)  # Field name made lowercase.
     flightid = models.CharField(db_column='FlightID', max_length=11, blank=True, null=True)  # Field name made lowercase.
-    airportid = models.IntegerField(db_column='AirportID', blank=True, null=True)  # Field name made lowercase.
+    airportid = models.CharField(db_column='AirportID', max_length=11, blank=True, null=True)   # Field name made lowercase.
     money = models.CharField(db_column='Money', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:

@@ -21,7 +21,7 @@
     <table>
         <tr>
             <th align="right">航班编号:</th>
-            <td><input name="flightid" value="{{ flight.flightid }}"></td>
+            <td><input name="flightid" value="{{ flight.flightid }}--不可修改"></td>
         </tr>
         <tr>
             <th align="right">航班名称：</th>
@@ -57,5 +57,12 @@
 {#        {% endifequal %}#}
     </table>
 </form>
+        {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+        {% endif %}
 </body>
 </html>

@@ -175,7 +175,12 @@
                 <input class="el-button" type="submit" value="注册">
             </form>
         </div>
-
-
+        {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+        {% endif %}
     </div>
 </body>
