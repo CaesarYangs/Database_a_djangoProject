@@ -1,0 +1,46 @@
+.input{
+    display: flex;
+}
+.header a{
+  text-decoration: none;
+  color: #464547;
+}
+
+
+table {
+
+     border-collapse: collapse;
+
+     font-family: Futura, Arial, sans-serif;
+
+}
+
+caption {
+
+     font-size: larger;
+
+     margin: 1em auto;
+
+}
+
+th,td {
+
+     padding: .65em;
+
+}
+
+th,td {
+
+     border-bottom: 1px solid #ddd;
+
+   border-top: 1px solid #ddd;
+
+   text-align: center;
+
+}
+
+tbody tr:hover {
+
+     background: linear-gradient(#fff,#aaa);
+
+}
