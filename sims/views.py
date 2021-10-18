@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 
 # Create your views here.
@@ -27,6 +28,11 @@ def index(request):
 
 def homepage(request):
     return render(request, "index.html", locals())
+
+def authToast(request):
+    messages.error(request,'无权限访问')
+    # return render(request,'index.html')
+    return HttpResponseRedirect('/')
 
 # 学生信息新增处理函数
 def add(request):

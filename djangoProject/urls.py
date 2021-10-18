@@ -27,6 +27,6 @@ urlpatterns = [
     url(r'^authorize/', include('authorize.urls')),
     url(r'^airport/', include('airport.urls')),
     url(r'^aircompany/', include('aircompany.urls')),
-    # url(r'^airport/', include('airport.urls')),
+    url(r'^toast/',authToast),
     # url(r'^aircompany/', include('aircompany.urls')),
 ]

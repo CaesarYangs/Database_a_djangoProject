@@ -49,11 +49,24 @@
     <!-- 服务内容导航 -->
     <div class="contentNav col-sm-3">
         <ul class="nav nav-pills nav-stacked">
-            <li id="f_1"><a href="/flight">订票系统</a></li>
-            <li id="f_2"><a href="/aircompany">航空公司系统</a></li>
-            <li id="f_3"><a href="/airport">机场管理系统</a></li>
-            <li id="f_4"><a href="#">其他</a></li>
-            <li id="f_5"><a href="/admin">管理员登录</a></li>
+            {% ifequal auth '1' %}
+                <li id="f_1"><a href="/flight">订票系统</a></li>
+                <li id="f_2"><a href="/aircompany">航空公司系统</a></li>
+                <li id="f_3"><a href="/airport">机场管理系统</a></li>
+                <li id="f_4"><a href="#">其他</a></li>
+                <li id="f_5"><a href="/admin">管理员登录</a></li>
+            {% else %}
+                <li id="f_1"><a href="/flight">订票系统</a></li>
+                <li id="f_2"><a href="/toast">航空公司系统</a></li>
+                <li id="f_3"><a href="/toast">机场管理系统</a></li>
+                <li id="f_4"><a href="#">其他</a></li>
+                <li id="f_5"><a href="/admin">管理员登录</a></li>
+            {% endifequal %}
+{#            <li id="f_1"><a href="/flight">订票系统</a></li>#}
+{#            <li id="f_2"><a href="/aircompany">航空公司系统</a></li>#}
+{#            <li id="f_3"><a href="/airport">机场管理系统</a></li>#}
+{#            <li id="f_4"><a href="#">其他</a></li>#}
+{#            <li id="f_5"><a href="/admin">管理员登录</a></li>#}
         </ul>
     </div>
 
@@ -100,5 +113,12 @@
 
 <script src="{% static 'js/jquery-3.6.0.min.js' %} "></script>
 <script src="../static/js/main.js"></script>
+        {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+        {% endif %}
 </body>
 </html>

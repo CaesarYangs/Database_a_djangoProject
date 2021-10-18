@@ -19,6 +19,7 @@ def showAuth(request):
 class UserInfo:
     islogin = False
     isVip = False
+    authority = False
     username = ''
     password = ''
 
@@ -41,14 +42,16 @@ def login_site(request):
     if user is not None:
         auth.login(request, user)
         UserInfo.islogin = True
-        ans = AuthUser.objects.values('username','is_staff')
+        ans = AuthUser.objects.values('username','is_staff','first_name')
         for i in range(len(ans)):
             if ans[i]['username'] == UserInfo.username:
                 UserInfo.isVip = ans[i]['is_staff']
+                UserInfo.authority = ans[i]['first_name']
+                request.session['authority'] = UserInfo.authority
                 request.session['isVip'] = UserInfo.isVip
                 break
         # messages.error(request, '登录成功')
-        return render(request, 'index.html', {'username': UserInfo.username,'islogin':UserInfo.islogin,'isVip':UserInfo.isVip})
+        return render(request, 'index.html', {'username': UserInfo.username,'islogin':UserInfo.islogin,'isVip':UserInfo.isVip,'auth':UserInfo.authority})
     else:
         # messages.error(request, '用户名或密码不正确')
         # return render(request, 'login.html', {
@@ -76,3 +79,7 @@ def register(request):
         user.save()
         messages.success(request,'注册成功！请登录')
         return render(request,'login.html')
+
+def authToast(request):
+    messages.error(request,'无权限访问')
+    return render(request,'index.html')
